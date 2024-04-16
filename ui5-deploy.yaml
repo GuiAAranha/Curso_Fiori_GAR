@@ -1,0 +1,31 @@
+# yaml-language-server: $schema=https://sap.github.io/ui5-tooling/schema/ui5.yaml.json
+
+specVersion: "3.1"
+metadata:
+  name: zgarapp001
+type: application
+builder:
+  resources:
+    excludes:
+      - /test/**
+      - /localService/**
+  customTasks:
+    - name: deploy-to-abap
+      afterTask: replaceVersion
+      configuration:
+        target:
+          url: https://sapfioriexed.exedconsulting.com:44300
+          client: '900'
+          auth: basic
+        params:
+          sap-language: en
+        credentials:
+          username: env:UI5_USERNAME
+          password: env:UI5_PASSWORD
+        app:
+          name: ZGARAPP001
+          description: Segundo APP GAR
+          package: ZP_CURSO_FIORI
+          transport: S4HK902974
+        exclude:
+          - /test/
